@@ -1,0 +1,39 @@
+# .graphifyignore — same syntax as .gitignore
+# graphify reads this to skip files during extraction
+# One pattern per line. Lines starting with # are comments.
+
+# Always ignore
+.git/
+graphify-out/
+*.lock
+*.log
+.DS_Store
+Thumbs.db
+
+# Suggested (scanned by Claude)
+.gradle/
+.settings/
+bin/
+build/
+Reports/
+Checkpoints/
+Drivers/
+Libs/
+Plugins/
+.classpath
+.project
+console.properties
+vcb-automation-project.prj
+.DS_Store
+.git/
+.gitignore
+.claude/
+
+# Config and local files
+GRAPHIFY.md
+.graphifyignore
+.llm-wiki-ignore
+LLM-WIKI-INSTRUCTIONS.md
+LLM-WIKI.md
+.claude/
+CLAUDE.md

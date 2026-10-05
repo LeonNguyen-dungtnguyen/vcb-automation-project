@@ -1,0 +1,8 @@
+{
+  "strategy": "manual-commit",
+  "allowedTools": [
+    "Read",
+    "Write",
+    "Bash(*)"
+  ]
+}

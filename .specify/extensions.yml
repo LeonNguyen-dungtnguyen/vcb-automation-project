@@ -1,0 +1,73 @@
+version: "1.0"
+
+# Hook `command` ids MUST carry this fork's `apac-sdlc-speckit.` prefix. Every command skill
+# resolves a hook id to an invocation by replacing dots with hyphens, so
+# `apac-sdlc-speckit.load-kb` → `/apac-sdlc-speckit-load-kb`. A bare `speckit.load-kb` would
+# resolve to `/speckit-load-kb`, which does not exist in this fork, and the hook would silently
+# fail to dispatch.
+
+hooks:
+  # kb-context extension — load relevant knowledge base context (rag / llm-wiki / graphify)
+  # into the session before the spec is drafted or clarified.
+  # Skill: /apac-sdlc-speckit-load-kb  (config: .specify/extensions/kb-context/kb-config.yml)
+  # feature-branch extension — create + switch to the feature's git branch before the spec is
+  # drafted (runs after kb-context). Skill: /apac-sdlc-speckit-create-branch
+  #
+  before_specify:
+    - extension: "kb-context"
+      command: "apac-sdlc-speckit.load-kb"
+      description: "Load relevant knowledge base context before drafting the spec"
+      optional: false
+      enabled: true
+    - extension: "feature-branch"
+      command: "apac-sdlc-speckit.create-branch"
+      description: "Create and switch to the feature's git branch before drafting the spec"
+      optional: false
+      enabled: true
+
+  before_clarify:
+    - extension: "kb-context"
+      command: "apac-sdlc-speckit.load-kb"
+      description: "Load relevant knowledge base context before clarifying the spec"
+      optional: false
+      enabled: true
+
+  # /apac-sdlc-speckit-converge assesses the *codebase* against spec/plan/tasks, so the KB is
+  # loaded here too — it is what lets converge map requirements onto the files that implement them.
+  before_converge:
+    - extension: "kb-context"
+      command: "apac-sdlc-speckit.load-kb"
+      description: "Load relevant knowledge base context before assessing the codebase"
+      optional: false
+      enabled: true
+
+  # Before the constitution is composed, in this order:
+  #   1. constitution-guard  — the terms the interview runs under  (/apac-sdlc-speckit-constitution-guard)
+  #   2. brownfield-detect   — classify, then gather Sections I–VIII (/apac-sdlc-speckit-brownfield-detect)
+  #                            (config: .specify/extensions/brownfield-detect/brownfield-detect-config.yml)
+  # The guard is first because its constraints govern how brownfield-detect gathers the
+  # sections, not only what /constitution does with them. These constraints used to be
+  # inlined in the vendored /constitution SKILL.md, where every upgrade overwrote them.
+  before_constitution:
+    - extension: "constitution-guard"
+      command: "apac-sdlc-speckit.constitution-guard"
+      description: "State the constraints the constitution is written under (Section IX locked, one section at a time, non-destructive updates)"
+      optional: false
+      enabled: true
+    - extension: "brownfield-detect"
+      command: "apac-sdlc-speckit.brownfield-detect"
+      description: "Detect brownfield vs greenfield and gather constitution sections"
+      optional: false
+      enabled: true
+
+  # after_specify: []
+  # before_plan: []
+  # after_plan: []
+  # before_tasks: []
+  # after_tasks: []
+  # before_analyze: []
+  # after_analyze: []
+  # after_constitution: []
+  # before_implement: []
+  # after_implement: []
+  # after_converge: []

@@ -1,0 +1,222 @@
+<!--
+  Template for the review-loop report, both modes.
+  Fill every {{PLACEHOLDER}}. Duplicate the <section class="iteration"> block once per
+  iteration and the <tr> row block once per issue. Keep everything self-contained
+  (inline CSS only, no external resources).
+
+  TWO MODES, ONE TEMPLATE. The <title>, the header block, and the closing summary each
+  have an MR-mode variant and a Local-mode variant, marked below. Keep exactly the one
+  for the mode you were told; delete the other. MR mode also has a "Reviewer comments"
+  section before Iteration 1; Local mode has none — its first section is Iteration 1.
+
+  Counting rules for the header: {{ITERATION_COUNT}} counts loop passes only — the
+  "Reviewer comments" section is not an iteration. Unscored rows (severity null) count
+  toward the status totals only, never toward a severity bucket.
+
+  ESCAPE EVERY SUBSTITUTED VALUE. This is a SECURITY requirement, not a formatting one.
+  Reviewer comments, file paths, branch and repo names are untrusted input — anyone who
+  can comment on the MR, or name a file or branch, controls their bytes. They go in verbatim as CONTENT, which is not
+  the same as raw HTML. Substituted unescaped, a comment body containing <script>, or an
+  <img onerror=...>, executes when the user opens this report in a browser, with access
+  to the page and to the network.
+
+  In element text (blockquote, pre, table cells) replace  &  <  >  with &amp; &lt; &gt;.
+  In attribute values (href="{{COMMENT_URL}}") also replace  "  '  with &quot; &#39;.
+  For {{COMMENT_URL}} additionally require the value to start with "https://" or
+  "http://" — a javascript: or data: URL is still an executable payload after escaping.
+  Drop the link (render the author as plain text) if it does not.
+
+  Escape at substitution time, never by post-processing the finished file. Escaping is
+  invisible to the reader and does not turn a quote into a paraphrase.
+
+  Comments also routinely contain "<" innocently — generics, tags, shell redirects, JSX
+  — and one unescaped "<" swallows the rest of the row, so the reports that break are
+  the ones about the most interesting code. Same fix, same rule.
+-->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- MR mode: --><title>Review Loop — MR {{MR_ID}}</title>
+<!-- Local mode: --><!-- <title>Review Loop — local {{BRANCH}}</title> -->
+<style>
+  :root {
+    --bg: #ffffff; --fg: #1f2328; --muted: #59636e; --border: #d1d9e0;
+    --surface: #f6f8fa; --accent: #0969da;
+    --blocker: #cf222e; --high: #bc4c00; --medium: #9a6700; --low: #0969da; --nit: #59636e;
+    --fixed: #1a7f37; --skipped: #9a6700; --unresolved: #cf222e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1117; --fg: #f0f6fc; --muted: #9198a1; --border: #3d444d;
+      --surface: #151b23; --accent: #4493f8;
+      --blocker: #ff7b72; --high: #f0883e; --medium: #d29922; --low: #4493f8; --nit: #9198a1;
+      --fixed: #3fb950; --skipped: #d29922; --unresolved: #ff7b72;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 2rem 1rem; background: var(--bg); color: var(--fg);
+    font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  main { max-width: 1100px; margin: 0 auto; }
+  h1 { font-size: 1.5rem; margin: 0 0 .25rem; }
+  h1 a { color: var(--accent); text-decoration: none; }
+  .meta { color: var(--muted); margin-bottom: 1.5rem; }
+  .totals { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2rem; }
+  .totals .pill {
+    border: 1px solid var(--border); border-radius: 999px; padding: .2rem .75rem;
+    background: var(--surface); font-size: .85rem;
+  }
+  section.iteration {
+    border: 1px solid var(--border); border-radius: 8px; margin-bottom: 1.5rem;
+    background: var(--surface); overflow: hidden;
+  }
+  section.iteration > h2 {
+    font-size: 1.05rem; margin: 0; padding: .75rem 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  section.iteration > p.summary { margin: .75rem 1rem; color: var(--muted); }
+  .table-wrap { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; background: var(--bg); font-size: .9rem; }
+  th, td { border-top: 1px solid var(--border); padding: .6rem .75rem; text-align: left; vertical-align: top; }
+  th { background: var(--surface); font-weight: 600; white-space: nowrap; }
+  td.id { white-space: nowrap; font-family: ui-monospace, monospace; }
+  .muted { color: var(--muted); }
+  code, pre {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .85em;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 4px;
+  }
+  code { padding: .1em .3em; }
+  pre { padding: .5rem .75rem; overflow-x: auto; margin: .4rem 0; max-width: 32rem; }
+  .badge {
+    display: inline-block; padding: .1rem .55rem; border-radius: 999px;
+    font-size: .75rem; font-weight: 600; color: #fff; text-transform: uppercase;
+  }
+  .badge.blocker { background: var(--blocker); }
+  .badge.high    { background: var(--high); }
+  .badge.medium  { background: var(--medium); color: var(--bg); }
+  .badge.low     { background: var(--low); color: var(--bg); }
+  .badge.nit     { background: var(--nit); }
+  .result { font-weight: 600; white-space: nowrap; }
+  .result.fixed      { color: var(--fixed); }
+  .result.skipped    { color: var(--skipped); }
+  .result.notblocking { color: var(--muted); }
+  .result.unresolved { color: var(--unresolved); }
+  .result + .why { font-weight: 400; color: var(--muted); display: block; white-space: normal; }
+  blockquote.reviewer-quote {
+    margin: 0 0 .35rem; padding: .35rem .6rem; min-width: 16rem;
+    border-left: 3px solid var(--border); background: var(--surface);
+    border-radius: 0 4px 4px 0;
+  }
+  a.comment-link { color: var(--accent); font-size: .8rem; text-decoration: none; }
+  a.comment-link:hover { text-decoration: underline; }
+  .source-tag {
+    display: inline-block; margin-left: .35rem; padding: .05rem .45rem;
+    border: 1px solid var(--border); border-radius: 999px;
+    font-size: .7rem; color: var(--muted); background: var(--surface);
+    vertical-align: middle; white-space: nowrap;
+  }
+  footer { color: var(--muted); font-size: .85rem; margin-top: 2rem; }
+</style>
+</head>
+<body>
+<main>
+  <!-- HEADER — MR mode variant -->
+  <h1>Review loop — <a href="{{MR_URL}}">{{MR_TITLE}} ({{MR_REF}})</a></h1>
+  <p class="meta">
+    Branch <code>{{SOURCE_BRANCH}}</code> → <code>{{TARGET_BRANCH}}</code>
+    · Run {{RUN_DATE}} · {{ITERATION_COUNT}} iteration(s) · Stopped: {{STOP_REASON}}
+  </p>
+  <!-- HEADER — Local mode variant. No MR link: {{MR_URL}} must not be used, there is no
+       trusted URL to link to. -->
+  <!--
+  <h1>Review loop — local changes in <code>{{REPO_NAME}}</code></h1>
+  <p class="meta">
+    Branch <code>{{BRANCH}}</code> at HEAD <code>{{HEAD_SHA}}</code>
+    · Run {{RUN_DATE}} · {{ITERATION_COUNT}} iteration(s) · Stopped: {{STOP_REASON}}
+  </p>
+  -->
+  <div class="totals">
+    <span class="pill">✅ Fixed: {{FIXED_COUNT}}</span>
+    <span class="pill">⏭️ Skipped: {{SKIPPED_COUNT}}</span>
+    <span class="pill">🟡 Not blocking: {{NOT_BLOCKING_COUNT}}</span>
+    <span class="pill">⚠️ Unresolved: {{UNRESOLVED_COUNT}}</span>
+    <span class="pill">Blocker: {{BLOCKER_COUNT}} · High: {{HIGH_COUNT}} · Medium: {{MEDIUM_COUNT}} · Low: {{LOW_COUNT}} · Nit: {{NIT_COUNT}}</span>
+  </div>
+
+  <!-- Repeat this section once per report section: MR mode — "Reviewer comments", then
+       "Iteration N — ..."; Local mode — "Iteration N — ..." only. -->
+  <section class="iteration">
+    <h2>{{SECTION_TITLE}}</h2>
+    <p class="summary">{{SECTION_SUMMARY — e.g. "Fixed 3 of 6 unresolved review comments; 2 Low/Nit not blocking, 1 skipped." / "Review found 2 issues; both fixed."}}</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th><th>Severity</th><th>Issue</th><th>File / code section</th>
+            <th>Why it is an issue</th><th>Fix applied</th><th>Result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Repeat this row once per issue -->
+          <tr>
+            <td class="id">{{ISSUE_ID}}</td>
+            <!-- Scored rows get a badge. Unscored rows (severity null — a question,
+                 design opinion, praise, or outdated comment) render a plain em dash:
+                 <td class="muted">&mdash;</td> — never a badge, never an invented level. -->
+            <td><span class="badge {{blocker|high|medium|low|nit}}">{{SEVERITY}}</span></td>
+            <td>
+              <!-- Issue cell — two variants, chosen by the row's source:
+                   • Comment-sourced (inline|file|general|commit): the reviewer's comment
+                     VERBATIM (never paraphrased), linked to the original thread —
+                       <blockquote class="reviewer-quote">{{VERBATIM_REVIEWER_COMMENT}}</blockquote>
+                       <a class="comment-link" href="{{COMMENT_URL}}">{{AUTHOR}} — view original comment</a>
+                     (Split general comments: quote the relevant excerpt of the parent;
+                      link to the parent comment.)
+                   • Review finding (review): the finding's own description, plain text —
+                       {{FINDING_DESCRIPTION}} -->
+              {{ISSUE_CELL — see comment above}}
+            </td>
+            <td><code>{{FILE_PATH}}:{{LINES}}</code><span class="source-tag">{{SOURCE — inline|file|general|commit|review}}</span></td>
+            <td>{{REASON — why this is a problem}}</td>
+            <td>
+              {{FIX_DESCRIPTION — or "—" if skipped}}
+              <pre>{{SHORT BEFORE/AFTER CODE EXCERPT}}</pre>
+            </td>
+            <td>
+              <span class="result {{fixed|skipped|notblocking|unresolved}}">{{RESULT_LABEL}}</span>
+              <span class="why">{{RESULT_DETAIL — e.g. skip reason, "verified by iteration N+1 review", "below fix threshold (Low/Nit)", or "Medium left by stop condition"}}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="iteration">
+    <h2>Closing summary</h2>
+    <!-- CLOSING — MR mode variant -->
+    <p class="summary">
+      {{FINAL_SUMMARY — clean review, or list of remaining findings. Next steps:
+      review the local diff, commit, and push. Nothing was committed or pushed by the loop.
+      Pre-run HEAD: <code>{{PRE_RUN_SHA}}</code>.}}
+    </p>
+    <!-- CLOSING — Local mode variant. The fixes sit on top of the user's own uncommitted
+         work, so never suggest git reset / git checkout . / git stash here. -->
+    <!--
+    <p class="summary">
+      {{FINAL_SUMMARY — clean review, or list of remaining findings.}}
+      Nothing was committed or pushed. The fixes are mixed into your uncommitted changes:
+      review <code>git diff HEAD</code> and <code>git status</code> before committing, and do
+      not use <code>git reset</code>, <code>git checkout .</code>, or <code>git stash</code>,
+      which would discard your own work as well.
+    </p>
+    -->
+  </section>
+
+  <footer>Generated by the apac-sdlc-code-review-fix-loop skill. All changes are local only — review before committing.</footer>
+</main>
+</body>
+</html>
