@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Verify locked out user receives proper error message on SauceDemo login.</description>
+   <name>TC02 Login Locked User</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>fa4bcd5a-9d17-4f2f-855f-951782e4f409</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>7d977546-f69e-4fce-b03c-15b26db5a027</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>569b8482-a96c-4a79-928d-0a3e90d0fbd4</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>f99fc3e6-f7e1-40f0-a22c-c7ff3064b8fe</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'locked_out_user'</defaultValue>
+      <description></description>
+      <id>7d977546-f69e-4fce-b03c-15b26db5a027</id>
+      <masked>false</masked>
+      <name>username</name>
+   </variable>
+   <variable>
+      <defaultValue>'secret_sauce'</defaultValue>
+      <description></description>
+      <id>569b8482-a96c-4a79-928d-0a3e90d0fbd4</id>
+      <masked>false</masked>
+      <name>password</name>
+   </variable>
+   <variable>
+      <defaultValue>'.*locked out.'</defaultValue>
+      <description></description>
+      <id>f99fc3e6-f7e1-40f0-a22c-c7ff3064b8fe</id>
+      <masked>false</masked>
+      <name>matchLockText</name>
+   </variable>
+</TestCaseEntity>
