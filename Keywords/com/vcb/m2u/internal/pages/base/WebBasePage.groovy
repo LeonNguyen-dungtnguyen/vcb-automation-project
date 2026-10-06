@@ -20,7 +20,6 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import com.vcb.common.BrowserTypeEnum
 import com.vcb.common.ExecutionWebSetting
 import com.vcb.common.WebUIKeyword
-import com.vcb.utils.DateUtils
 
 import internal.GlobalVariable
 
