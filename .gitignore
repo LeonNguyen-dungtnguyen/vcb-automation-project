@@ -18,3 +18,5 @@ build
 .cache
 
 graphify-out/*
+
+client-documents/*

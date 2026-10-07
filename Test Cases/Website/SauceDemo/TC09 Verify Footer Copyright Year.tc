@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Verify the footer shows the copyright text with the current year.</description>
+   <name>TC09 Verify Footer Copyright Year</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>c4a741f4-e367-49b6-8441-24f4a52411cb</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>3ac9910a-ca8c-4ced-9054-a8adb358633b</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>e9ee7a6a-e6db-4cfb-968a-91f8b6ff51b0</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'Sauce Labs. All Rights Reserved.'</defaultValue>
+      <description></description>
+      <id>3ac9910a-ca8c-4ced-9054-a8adb358633b</id>
+      <masked>false</masked>
+      <name>copyrightText</name>
+   </variable>
+   <variable>
+      <defaultValue>'Asia/Kuala_Lumpur'</defaultValue>
+      <description></description>
+      <id>e9ee7a6a-e6db-4cfb-968a-91f8b6ff51b0</id>
+      <masked>false</masked>
+      <name>timeZone</name>
+   </variable>
+</TestCaseEntity>

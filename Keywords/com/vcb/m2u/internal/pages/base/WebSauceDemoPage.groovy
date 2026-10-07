@@ -7,6 +7,7 @@ import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.webui.common.WebUiCommonHelper
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.vcb.common.WebUIKeyword
+import com.vcb.utils.StringUtils
 import org.openqa.selenium.Keys
 import java.util.Arrays
 import org.openqa.selenium.WebElement
@@ -14,6 +15,10 @@ import org.openqa.selenium.WebElement
 import internal.GlobalVariable
 
 public class WebSauceDemoPage extends WebBasePage {
+
+	// Repeated elements read as text lists (inventory page and checkout overview share the same markup)
+	static final String XPATH_ITEM_PRICES = "//div[@data-test='inventory-item-price']"
+	static final String XPATH_SORT_OPTIONS = "//select[@data-test='product-sort-container']/option"
 
 	public static TestObject txtUsername() {
 		return findTestObject('Object Repository/Website/SauceDemo/Login/txtUsername')
@@ -89,6 +94,26 @@ public class WebSauceDemoPage extends WebBasePage {
 
 	public static TestObject lblCompleteHeader() {
 		return findTestObject('Object Repository/Website/SauceDemo/Checkout/lblCompleteHeader')
+	}
+
+	public static TestObject ddlSortProducts() {
+		return findTestObject('Object Repository/Website/SauceDemo/Inventory/ddlSortProducts')
+	}
+
+	public static TestObject lblFooterCopy() {
+		return findTestObject('Object Repository/Website/SauceDemo/Common/lblFooterCopy')
+	}
+
+	public static TestObject lblSubtotal() {
+		return findTestObject('Object Repository/Website/SauceDemo/Checkout/lblSubtotal')
+	}
+
+	public static TestObject lblTax() {
+		return findTestObject('Object Repository/Website/SauceDemo/Checkout/lblTax')
+	}
+
+	public static TestObject lblTotal() {
+		return findTestObject('Object Repository/Website/SauceDemo/Checkout/lblTotal')
 	}
 
 	void openLoginPage(String url = GlobalVariable.G_url, FailureHandling flowControl = defaultFailureHandling) {
@@ -195,7 +220,41 @@ public class WebSauceDemoPage extends WebBasePage {
 		}
 	}
 
-	void completeCheckout(String firstName, String lastName, String postalCode, FailureHandling flowControl = defaultFailureHandling) {
+	List<String> getItemPrices() {
+		return WebUIKeyword.getListOfTextByXPath(XPATH_ITEM_PRICES)
+	}
+
+	/**
+	 * Item prices in cents, e.g. '$29.99' -> 2999, so they can be compared and summed without rounding errors
+	 */
+	List<Long> getItemPricesInCents() {
+		return getItemPrices().collect { String price -> StringUtils.parseAmountStringToIntegerInApp(price) as Long }
+	}
+
+	List<String> getSortOptions() {
+		waitForElementVisible(this.ddlSortProducts(), GlobalVariable.G_timeoutMedium)
+		return WebUIKeyword.getListOfTextByXPath(XPATH_SORT_OPTIONS)
+	}
+
+	void sortProductsBy(String optionValue, FailureHandling flowControl = defaultFailureHandling) {
+		waitForElementVisible(this.ddlSortProducts(), GlobalVariable.G_timeoutMedium, flowControl)
+		WebUI.selectOptionByValue(this.ddlSortProducts(), optionValue, false, flowControl)
+	}
+
+	String getFooterText(FailureHandling flowControl = defaultFailureHandling) {
+		scrollToTestObject(this.lblFooterCopy(), GlobalVariable.G_timeoutMedium, flowControl)
+		return getText(this.lblFooterCopy(), flowControl)
+	}
+
+	/**
+	 * Amount shown on a checkout summary label in cents, e.g. 'Item total: $39.98' -> 3998
+	 */
+	long getSummaryAmountInCents(TestObject summaryLabel, FailureHandling flowControl = defaultFailureHandling) {
+		waitForElementVisible(summaryLabel, GlobalVariable.G_timeoutMedium, flowControl)
+		return StringUtils.parseAmountStringToIntegerInApp(getText(summaryLabel, flowControl))
+	}
+
+	void goToCheckoutOverview(String firstName, String lastName, String postalCode, FailureHandling flowControl = defaultFailureHandling) {
 		WebUIKeyword.clickAndVerifyObjectAppears(
 			this.btnCheckout(),
 			this.txtFirstName(),
@@ -213,6 +272,10 @@ public class WebSauceDemoPage extends WebBasePage {
 			'Unable to navigate to checkout overview page. Finish button is not visible after enhanced and JavaScript click on continue button.',
 			flowControl
 		)
+	}
+
+	void completeCheckout(String firstName, String lastName, String postalCode, FailureHandling flowControl = defaultFailureHandling) {
+		goToCheckoutOverview(firstName, lastName, postalCode, flowControl)
 
 		WebUIKeyword.clickAndVerifyObjectAppears(
 			this.btnFinish(),

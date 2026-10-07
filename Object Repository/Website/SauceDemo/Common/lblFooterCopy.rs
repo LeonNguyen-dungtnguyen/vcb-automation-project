@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>lblFooterCopy</name>
+   <tag></tag>
+   <elementGuidId>446e7bed-a5f9-45cd-9709-2b2d83e2c2d5</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>XPATH</key>
+         <value>//div[@data-test='footer-copy']</value>
+      </entry>
+      <entry>
+         <key>CSS</key>
+         <value>div.footer_copy</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>true</useRalativeImagePath>
+</WebElementEntity>
