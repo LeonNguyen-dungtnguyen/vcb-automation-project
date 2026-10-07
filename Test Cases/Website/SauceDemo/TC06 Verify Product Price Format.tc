@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Verify every inventory price is shown as a positive dollar amount with 2 decimal places.</description>
+   <name>TC06 Verify Product Price Format</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>f4d01283-0006-4ba9-8800-60b4ec3c557a</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>f117bbc7-a7f9-4857-aa02-7a0e7c272c35</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>887053e4-161b-459b-b3a1-12045666bccb</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>7be4129e-8612-4a6a-9575-6b93d034f285</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'6'</defaultValue>
+      <description></description>
+      <id>f117bbc7-a7f9-4857-aa02-7a0e7c272c35</id>
+      <masked>false</masked>
+      <name>expectedProductCount</name>
+   </variable>
+   <variable>
+      <defaultValue>'$'</defaultValue>
+      <description></description>
+      <id>887053e4-161b-459b-b3a1-12045666bccb</id>
+      <masked>false</masked>
+      <name>currencySymbol</name>
+   </variable>
+   <variable>
+      <defaultValue>'^\\$\\d+\\.\\d{2}$'</defaultValue>
+      <description></description>
+      <id>7be4129e-8612-4a6a-9575-6b93d034f285</id>
+      <masked>false</masked>
+      <name>pricePattern</name>
+   </variable>
+</TestCaseEntity>

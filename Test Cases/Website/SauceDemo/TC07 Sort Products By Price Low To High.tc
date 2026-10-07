@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Verify the sort dropdown options and that sorting by price (low to high) orders the products by price.</description>
+   <name>TC07 Sort Products By Price Low To High</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>14d6967d-8665-4cb2-9e59-d6d2d71ce91c</testCaseGuid>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>36b65768-dbab-4f17-9b87-f5c45595741b</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId></testDataLinkId>
+      <type>DEFAULT</type>
+      <value></value>
+      <variableId>53e1a491-73dc-49d0-9874-10f3abee230e</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>'Name (A to Z),Name (Z to A),Price (low to high),Price (high to low)'</defaultValue>
+      <description></description>
+      <id>36b65768-dbab-4f17-9b87-f5c45595741b</id>
+      <masked>false</masked>
+      <name>sortOptions</name>
+   </variable>
+   <variable>
+      <defaultValue>'lohi'</defaultValue>
+      <description></description>
+      <id>53e1a491-73dc-49d0-9874-10f3abee230e</id>
+      <masked>false</masked>
+      <name>sortValue</name>
+   </variable>
+</TestCaseEntity>

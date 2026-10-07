@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>lblTotal</name>
+   <tag></tag>
+   <elementGuidId>2722e839-2792-4a48-9712-4f49a9b029e3</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>XPATH</key>
+         <value>//div[@data-test='total-label']</value>
+      </entry>
+      <entry>
+         <key>CSS</key>
+         <value>div.summary_total_label</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>true</useRalativeImagePath>
+</WebElementEntity>
