@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>TC No 14 (row 15) – HF-03: Tạo mới → Gửi duyệt → KT trưởng Trả lại (Yêu cầu chỉnh sửa) → Maker sửa, gửi lại → Duyệt → Ký số → Đã gửi ngân hàng. 1 cấp duyệt, không ký số pháp nhân.</description>
+   <name>TC014 HF03 Tra lai 1 cap khong PN</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>ded33be0-6d70-47d4-aa40-7aa616444d23</testCaseGuid>
+</TestCaseEntity>

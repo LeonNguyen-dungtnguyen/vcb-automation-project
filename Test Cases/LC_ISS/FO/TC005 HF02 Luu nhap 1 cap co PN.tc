@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>TC No 5 (row 6) – HF-02: Tạo mới → Lưu nháp → Mở lại, Gửi duyệt → Duyệt → Ký số cá nhân → Ký số pháp nhân → Đã gửi ngân hàng. 1 cấp duyệt, có ký số pháp nhân.</description>
+   <name>TC005 HF02 Luu nhap 1 cap co PN</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>e16feece-8236-4cb9-8099-9b693abe2ca0</testCaseGuid>
+</TestCaseEntity>

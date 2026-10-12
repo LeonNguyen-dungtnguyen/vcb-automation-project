@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataFileEntity>
+   <description>Mandatory fields of the LC creation wizard (one row per scenario). Columns are section.field.</description>
+   <name>LcRequest_Minimal</name>
+   <tag></tag>
+   <containsHeaders>true</containsHeaders>
+   <csvSeperator>,</csvSeperator>
+   <dataFileGUID>7db1e003-955d-479f-851f-8a43f30b1164</dataFileGUID>
+   <dataSourceUrl>Data Files/LC_ISS/LcRequest_Minimal.csv</dataSourceUrl>
+   <driver>CSV</driver>
+   <isInternalPath>true</isInternalPath>
+   <query></query>
+   <secureUserAccount>false</secureUserAccount>
+   <sheetName></sheetName>
+   <usingGlobalDBSetting>false</usingGlobalDBSetting>
+</DataFileEntity>

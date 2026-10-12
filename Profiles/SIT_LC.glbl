@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalVariableEntities>
+   <description>VCB TradeFlat LC Issuance (FO + BO) on SIT. Passwords MUST be entered as Katalon encrypted text - never commit plain-text passwords.</description>
+   <name>SIT_LC</name>
+   <tag></tag>
+   <defaultProfile>false</defaultProfile>
+   <GlobalVariableEntity>
+      <description>FO (customer portal) login URL on SIT</description>
+      <initValue>'TODO_URL'</initValue>
+      <name>G_foUrl</name>
+      <protected>false</protected>
+      <valueType>STRING</valueType>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description>BO (bank back office) login URL on SIT</description>
+      <initValue>'TODO_URL'</initValue>
+      <name>G_boUrl</name>
+      <protected>false</protected>
+      <valueType>STRING</valueType>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description>FO Maker - username</description>
+      <initValue>'TODO_USER'</initValue>
+      <name>G_foMakerUser</name>
+      <protected>false</protected>
+      <valueType>STRING</valueType>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description>FO Maker - password, enter as Katalon encrypted text</description>
+      <initValue>'TODO_SET_AS_ENCRYPTED_TEXT'</initValue>
+      <name>G_foMakerPassword</name>
+      <protected>false</protected>
+      <valueType>STRING</valueType>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description>FO Kế toán phó - username</description>
+      <initValue>'TODO_USER'</initValue>
+      <name>G_foKeToanPhoUser</name>
+      <protected>false</protected>
+      <valueType>STRING</valueType>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description>FO Kế toán phó - password, enter as Katalon encrypted text</description>
+      <initValue>'TODO_SET_AS_ENCRYPTED_TEXT'</initValue>
+      <name>G_foKeToanPhoPassword</name>
+      <protected>false</protected>
+      <valueType>STRING</valueType>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description>FO Kế toán trưởng - username</description>
+      <initValue>'TODO_USER'</initValue>
+      <name>G_foKeToanTruongUser</name>
+      <protected>false</protected>
+      <valueType>STRING</valueType>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description>FO Kế toán trưởng - password, enter as Katalon encrypted text</description>
+      <initValue>'TODO_SET_AS_ENCRYPTED_TEXT'</initValue>
+      <name>G_foKeToanTruongPassword</name>
+      <protected>false</protected>
+      <valueType>STRING</valueType>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description>FO Chủ tài khoản - username</description>
+      <initValue>'TODO_USER'</initValue>
+      <name>G_foChuTaiKhoanUser</name>
+      <protected>false</protected>
+      <valueType>STRING</valueType>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description>FO Chủ tài khoản - password, enter as Katalon encrypted text</description>
+      <initValue>'TODO_SET_AS_ENCRYPTED_TEXT'</initValue>
+      <name>G_foChuTaiKhoanPassword</name>
+      <protected>false</protected>
+      <valueType>STRING</valueType>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description>FO Người ký pháp nhân - username</description>
+      <initValue>'TODO_USER'</initValue>
+      <name>G_foNguoiKyPhapNhanUser</name>
+      <protected>false</protected>
+      <valueType>STRING</valueType>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description>FO Người ký pháp nhân - password, enter as Katalon encrypted text</description>
+      <initValue>'TODO_SET_AS_ENCRYPTED_TEXT'</initValue>
+      <name>G_foNguoiKyPhapNhanPassword</name>
+      <protected>false</protected>
+      <valueType>STRING</valueType>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description>BO CA (CBTĐ) - username</description>
+      <initValue>'TODO_USER'</initValue>
+      <name>G_boCaUser</name>
+      <protected>false</protected>
+      <valueType>STRING</valueType>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description>BO CA (CBTĐ) - password, enter as Katalon encrypted text</description>
+      <initValue>'TODO_SET_AS_ENCRYPTED_TEXT'</initValue>
+      <name>G_boCaPassword</name>
+      <protected>false</protected>
+      <valueType>STRING</valueType>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description>BO CA lead (QLTĐ) - username</description>
+      <initValue>'TODO_USER'</initValue>
+      <name>G_boCaLeadUser</name>
+      <protected>false</protected>
+      <valueType>STRING</valueType>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description>BO CA lead (QLTĐ) - password, enter as Katalon encrypted text</description>
+      <initValue>'TODO_SET_AS_ENCRYPTED_TEXT'</initValue>
+      <name>G_boCaLeadPassword</name>
+      <protected>false</protected>
+      <valueType>STRING</valueType>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description>BO CRC (CB QLN) - username</description>
+      <initValue>'TODO_USER'</initValue>
+      <name>G_boCrcUser</name>
+      <protected>false</protected>
+      <valueType>STRING</valueType>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description>BO CRC (CB QLN) - password, enter as Katalon encrypted text</description>
+      <initValue>'TODO_SET_AS_ENCRYPTED_TEXT'</initValue>
+      <name>G_boCrcPassword</name>
+      <protected>false</protected>
+      <valueType>STRING</valueType>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description>BO CRC lead (LĐ QLN) - username</description>
+      <initValue>'TODO_USER'</initValue>
+      <name>G_boCrcLeadUser</name>
+      <protected>false</protected>
+      <valueType>STRING</valueType>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description>BO CRC lead (LĐ QLN) - password, enter as Katalon encrypted text</description>
+      <initValue>'TODO_SET_AS_ENCRYPTED_TEXT'</initValue>
+      <name>G_boCrcLeadPassword</name>
+      <protected>false</protected>
+      <valueType>STRING</valueType>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description>BO BGĐ CN - username</description>
+      <initValue>'TODO_USER'</initValue>
+      <name>G_boBgdCnUser</name>
+      <protected>false</protected>
+      <valueType>STRING</valueType>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description>BO BGĐ CN - password, enter as Katalon encrypted text</description>
+      <initValue>'TODO_SET_AS_ENCRYPTED_TEXT'</initValue>
+      <name>G_boBgdCnPassword</name>
+      <protected>false</protected>
+      <valueType>STRING</valueType>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description>Absolute path of a sample file for Hồ sơ đính kèm upload</description>
+      <initValue>'TODO_PATH'</initValue>
+      <name>G_lcSampleAttachment</name>
+      <protected>false</protected>
+      <valueType>STRING</valueType>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>5</initValue>
+      <name>G_timeoutShort</name>
+      <protected>false</protected>
+      <valueType>NUMBER</valueType>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>15</initValue>
+      <name>G_timeoutMedium</name>
+      <protected>false</protected>
+      <valueType>NUMBER</valueType>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>'chrome'</initValue>
+      <name>G_browserName</name>
+      <protected>false</protected>
+      <valueType>STRING</valueType>
+   </GlobalVariableEntity>
+</GlobalVariableEntities>

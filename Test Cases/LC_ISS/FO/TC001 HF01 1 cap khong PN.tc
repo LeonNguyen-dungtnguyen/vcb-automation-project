@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>TC No 1 (row 2) – HF-01: Tạo mới → Gửi duyệt → KT trưởng duyệt (2FA) → Chủ TK ký số → Đã gửi ngân hàng. 1 cấp duyệt, không ký số pháp nhân.</description>
+   <name>TC001 HF01 1 cap khong PN</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>116ddcb8-f369-47f3-b395-7d48d26c9de5</testCaseGuid>
+</TestCaseEntity>

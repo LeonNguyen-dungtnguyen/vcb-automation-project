@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>TC No 27 (row 28) – BO Happy case 1: CA xử lý → CA lead duyệt → CRC xử lý → CRC lead duyệt & ký số điện → TI → Hoàn thành. Không cần thẩm quyền BGĐ CN, điện không ký số, không chuyển khẩu/tạm nhập tái xuất.</description>
+   <name>TC027 HC1 De xuat phe duyet khong BGD CN</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>be500840-c831-45c4-b673-d0cabb89f2b6</testCaseGuid>
+</TestCaseEntity>
